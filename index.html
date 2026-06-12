@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Letter for Erik</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght=600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink-soft: #fff0f3;
+            --pink-accent: #ff8da1;
+            --pink-dark: #d9455f;
+            --pink-seal: #d67687; 
+            --text-gray: #5e5e5e;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .phone-wrapper {
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: #fff;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        /* HALAMAN AMPLOPH DEPAN */
+        .page-envelope {
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: #ffffff;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.6s ease-in-out, opacity 0.6s;
+        }
+        .page-envelope.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .envelope-card {
+            width: 85%;
+            aspect-ratio: 4/3;
+            background: #ffffff;
+            border: 2px solid #ffe3e8;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(214,118,135,0.12);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .envelope-seal {
+            width: 50px;
+            height: 50px;
+            background-color: var(--pink-seal);
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(214,118,135,0.3);
+        }
+        .envelope-seal::after {
+            content: '♥'; 
+            color: #ffffff; 
+            font-size: 18px;
+        }
+        
+        .env-to { 
+            font-family: 'Alex Brush', cursive; 
+            font-size: 40px; 
+            color: var(--pink-seal); 
+            margin-bottom: 5px;
+        }
+        .env-from { 
+            font-family: 'Alex Brush', cursive; 
+            font-size: 30px; 
+            color: var(--pink-seal); 
+            align-self: flex-end; 
+            margin-right: 45px; 
+        }
+        .tap-text { 
+            margin-top: 35px; 
+            font-size: 14px; 
+            color: #bfa1a5; 
+            text-align: center; 
+        }
+        
+        /* TANDA PANAH TIPIS WARNA PINK DI BAWAH AMPLOPH */
+        .tap-text .pink-arrow { 
+            display: block; 
+            font-size: 22px; 
+            color: var(--pink-accent); 
+            font-weight: 300;
+            margin-bottom: 5px; 
+            animation: bounceEffect 1.5s infinite ease-in-out;
+        }
+
+        @keyframes bounceEffect {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .main-content-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: #ffffff;
+        }
+        
+        .page-section {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out;
+            z-index: 1;
+        }
+        .page-section.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 5;
+        }
+
+        .navigation-box {
+            position: absolute;
+            bottom: 35px;
+            width: 85%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CONTAINER KHUSUS TOMBOL BERJEJER BIAR RAPI */
+        .btn-group-row {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-continue {
+            flex: 1;
+            padding: 14px;
+            background: linear-gradient(to right, #ff9eb3, #ff7893);
+            color: #fff; 
+            border: none;
+            border-radius: 50px; 
+            text-align: center;
+            font-weight: 500; 
+            font-size: 16px;
+            box-shadow: 0 5px 15px rgba(255,120,147,0.25);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* TOMBOL BACK GAYA MINIMALIS NYAMAN DI MATA */
+        .btn-back-nav {
+            flex: 1;
+            padding: 14px;
+            background: #ffffff;
+            color: #888888;
+            border: 1px solid #e0e0e0;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+        }
+
+        /* PEMANCING AUDIO */
+        .music-box-card {
+            width: 80%;
+            padding: 30px 20px;
+            background: #fff;
+            border-radius: 20px;
+            border: 1px solid var(--pink-soft);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+        .music-icon-spin {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--pink-accent);
+            display: inline-block;
+        }
+        .music-box-card p {
+            font-size: 15px;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+        }
+
+        /* HALAMAN COVER */
+        #page-cover {
+            background: #ffffff;
+        }
+        .cover-title { font-family: 'Alex Brush', cursive; font-size: 55px; color: var(--pink-dark); line-height: 1.2; }
+        .cover-sub { font-size: 16px; color: var(--text-gray); margin: 15px 0; letter-spacing: 0.5px; }
+
+        /* HALAMAN SURAT */
+        #page-letter {
+            background-image: url('foto.jpeg'); 
+            background-size: cover;
+            background-position: center;
+        }
+        #page-letter .blur-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.55); 
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 1;
+        }
+        #page-letter .content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 130px;
+        }
+        .quote-icon { font-size: 45px; color: var(--pink-accent); margin-bottom: 5px; font-family: serif; line-height: 1; }
+        
+        .letter-box {
+            width: 85%;
+            max-height: 42vh;
+            overflow-y: auto;
+            padding: 5px 10px;
+            text-align: left;
+            scroll-behavior: smooth;
+        }
+        
+        .letter-box .greeting-title {
+            font-family: 'Caveat', cursive;
+            font-size: 28px;
+            color: #111111;
+        }
+        .letter-box p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: #2b2b2b;
+            line-height: 1.7;
+            letter-spacing: 0.3px; 
+        }
+        
+        .btn-expand {
+            width: 100%;
+            background: rgba(255, 240, 243, 0.9);
+            border: 1px solid rgba(255, 141, 161, 0.3);
+            color: var(--pink-dark);
+            padding: 11px;
+            border-radius: 50px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            margin-bottom: 5px;
+        }
+
+        /* HALAMAN FOTO JELAS */
+        #page-photo {
+            background: #ffffff;
+        }
+        .badge-header {
+            background: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            display: flex; align-items: center; gap: 8px;
+            font-size: 14px; font-weight: 500; color: #444;
+            margin-bottom: 25px;
+            border: 1px solid var(--pink-soft);
+        }
+        .badge-header .icon { color: var(--pink-accent); }
+        .photo-frame {
+            width: 85%;
+            aspect-ratio: 1/1;
+            background: #fff;
+            padding: 10px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid var(--pink-soft);
+            margin-bottom: 80px;
+        }
+        .photo-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; border-radius: 18px;
+        }
+
+        /* POP-UP FULL TEXT */
+        .modal-fullscreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            padding: 35px 25px;
+        }
+        .modal-fullscreen.active { display: flex; }
+        .close-modal {
+            align-self: flex-end;
+            font-size: 15px;
+            background: var(--pink-soft);
+            border: none;
+            color: var(--pink-dark);
+            cursor: pointer;
+            margin-bottom: 20px;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+        .modal-scroll-body {
+            flex: 1;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .modal-scroll-body p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #2b2b2b;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+
+<audio id="myAudio" loop preload="auto">
+    <source src="blue.mp3" type="audio/mpeg">
+</audio>
+
+<div class="phone-wrapper">
+
+    <div class="page-envelope" id="envelopePage" onclick="bukaSurat()">
+        <div class="envelope-card">
+            <div class="envelope-seal"></div>
+            <div class="env-to">To: Erik</div>
+            <div class="env-from">From: Alma</div>
+        </div>
+        <div class="tap-text">
+            <span class="pink-arrow">↑</span> <p>Tap to open</p>
+        </div>
+    </div>
+
+    <div class="main-content-container">
+        
+        <section class="page-section active" id="page-music-trigger">
+            <div class="music-box-card">
+                <div class="music-icon-spin">🎵</div>
+                <h2 style="color: var(--pink-dark); font-size: 20px; margin-bottom: 5px;">A Song For You</h2>
+                <p>Please click the button below to play the background music before continuing.</p>
+                <button class="btn-continue" style="position: static; width: 100%;" onclick="nyalakanMusikDanLanjut()">
+                    ▶ Play Music
+                </button>
+            </div>
+        </section>
+
+        <section class="page-section" id="page-cover">
+            <h1 class="cover-title">Erik</h1>
+            <p class="cover-sub">To a wonderful friend,</p> 
+            <h1 class="cover-title" style="font-size: 42px;">Alma</h1>
+            
+            <div class="navigation-box">
+                <div class="btn-group-row">
+                    <button class="btn-back-nav" onclick="tutupSuratKeAmplop()">✕ Close</button>
+                    <button class="btn-continue" onclick="pindahHalaman('page-letter')">Continue ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section" id="page-letter">
+            <div class="blur-overlay"></div>
+            <div class="content-wrapper">
+                <div class="quote-icon">”</div>
+                <div class="letter-box">
+                    <span class="greeting-title">Hi Erik,</span><br><br>
+                    <p>I hope this letter finds you well and brings a smile to your face today. First of all, I want to say a huge congratulations to you for completing your exams! I am writing this because I truly want you to know how incredibly proud I am of you.</p><br>
+                    <p>Seeing your dedication, your focus, and the amazing effort you've put into this journey has been wonderful. You have shown so much growth and determination, and you should be very proud of yourself too.</p>
+                </div>
+                
+                <div class="navigation-box">
+                    <button class="btn-expand" onclick="bukaModalFullscreen()">
+                        <span>⛶</span> View Full Letter
+                    </button>
+                    <div class="btn-group-row">
+                        <button class="btn-back-nav" onclick="pindahHalaman('page-cover')">↩ Back</button>
+                        <button class="btn-continue" onclick="pindahHalaman('page-photo')">Continue ➔</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section" id="page-photo">
+            <div class="badge-header">
+                <span class="icon">🌸</span> 
+                <span>A flower for you</span> 
+            </div>
+            <div class="photo-frame">
+                <img src="foto.jpeg" alt="A flower for you">
+            </div>
+
+            <div class="navigation-box">
+                <button class="btn-back-nav" style="width: 100%;" onclick="pindahHalaman('page-letter')">
+                    ↩ Back
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="modal-fullscreen" id="suratModal">
+        <button class="close-modal" onclick="tutupModalFullscreen()">✕ Close</button>
+        <div class="modal-scroll-body">
+            <p style="font-family: 'Caveat', cursive; font-size: 30px; color: #111;"><strong>Hi Erik,</strong></p><br>
+            <p>I hope this letter finds you well and brings a smile to your face today. First of all, I want to say a huge congratulations to you for completing your exams! I am writing this because I truly want you to know how incredibly proud I am of you.</p><br>
+            <p>Seeing your dedication, your focus, and the amazing effort you've put into this journey has been wonderful. You have shown so much growth and determination, and you should be very proud of yourself too.</p><br>
+            <p>You have done a wonderful job, and completing this step is a great achievement. I always believe in your potential and your talents. You are capable of so many amazing things, and this exam is just one of the steps to a brighter future. Keep going, Erik! I know you can do it.</p><br>
+            <p style="font-family: 'Caveat', cursive; font-size: 26px; margin-top: 15px;">Best regards,<br>Alma</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function bukaSurat() {
+        document.getElementById('envelopePage').classList.add('hidden');
+    }
+
+    function nyalakanMusikDanLanjut() {
+        var lagu = document.getElementById("myAudio");
+        lagu.play().catch(function(error) {
+            console.log("Audio play failed:", error);
+        });
+        pindahHalaman('page-cover');
+    }
+
+    function pindahHalaman(idHalamanTujuan) {
+        const semuaHalaman = document.querySelectorAll('.page-section');
+        semuaHalaman.forEach(halaman => {
+            halaman.classList.remove('active');
+        });
+        document.getElementById(idHalamanTujuan).classList.add('active');
+    }
+
+    // MUNDUR KE AMPLOPH PALING DEPAN KEMBALI
+    function tutupSuratKeAmplop() {
+        document.getElementById('envelopePage').classList.remove('hidden');
+        pindahHalaman('page-music-trigger');
+    }
+
+    const modalSurat = document.getElementById('suratModal');
+    function bukaModalFullscreen() { modalSurat.classList.add('active'); }
+    function tutupModalFullscreen() { modalSurat.classList.remove('active'); }
+</script>
+
+</body>
+</html>
